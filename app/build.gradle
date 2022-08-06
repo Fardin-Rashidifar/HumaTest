@@ -9,20 +9,35 @@ plugins {
 
 android {
     compileSdk 31
-
+    signingConfigs {
+        release{
+            storeFile file('..\\humaTestKey.jks')
+            storePassword '110110'
+            keyPassword '110110'
+            keyAlias 'humaTestKey'
+        }
+    }
     defaultConfig {
         applicationId "f.r.humatest2"
         minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        setProperty("archivesBaseName", "humaTest-${versionName}")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            //minifyEnabled false
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            //shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     dataBinding{
