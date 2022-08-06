@@ -1,4 +1,23 @@
 <resources>
 
-    <style name="Theme.HumaTest2" parent="@style/Theme.Leanback" />
+    <style name="Theme.HumaTest2" parent="@style/Theme.Leanback" >
+        // your custom attributes
+       <!-- <item name="browseTitleViewStyle">@style/customTitleViewStyle</item>-->
+        <item name="browseTitleTextStyle">@style/customTitleViewStyle</item>
+
+        <!--<item name="lb_browse_header_fontFamily">@font/iransans_mobile_fa_num_bold</item>-->
+
+    </style>
+
+    <style name="customTitleViewStyle">
+        <item name="android:fontFamily">@font/iransans_mobile_fa_num_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#FFC400</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:drawableEnd">@drawable/ic_round_home_24</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
 </resources>
