@@ -1,4 +1,4 @@
-package f.r.humatest
+package f.r.humatest2.dataClass
 
 object MovieList {
     val MOVIE_CATEGORY = arrayOf(

@@ -1,4 +1,4 @@
-package f.r.humatest
+package f.r.humatest2.dataClass
 
 import java.io.Serializable
 
