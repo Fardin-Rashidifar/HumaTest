@@ -28,6 +28,14 @@ android {
     dataBinding{
         enabled = true
     }
+    kapt {
+        correctErrorTypes true
+    }
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
 }
 
 dependencies {
