@@ -1,4 +1,4 @@
-package f.r.humatest2
+package f.r.humatest2.adapter
 
 import android.graphics.drawable.Drawable
 import androidx.leanback.widget.ImageCardView
@@ -8,7 +8,8 @@ import android.util.Log
 import android.view.ViewGroup
 
 import com.bumptech.glide.Glide
-import f.r.humatest.Movie
+import f.r.humatest2.dataClass.Movie
+import f.r.humatest2.R
 import kotlin.properties.Delegates
 
 /**
