@@ -4,6 +4,8 @@
         // your custom attributes
        <!-- <item name="browseTitleViewStyle">@style/customTitleViewStyle</item>-->
         <item name="browseTitleTextStyle">@style/customTitleViewStyle</item>
+        <item name="rowHeaderStyle">@style/customRowHeaderStyle</item>
+
 
         <!--<item name="lb_browse_header_fontFamily">@font/iransans_mobile_fa_num_bold</item>-->
 
@@ -19,5 +21,12 @@
         <item name="android:gravity">center</item>
 
     </style>
-
+    <style name="customRowHeaderStyle" >
+        <item name="android:fontFamily">@font/iransans_mobile_fa_num_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#F44336</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
