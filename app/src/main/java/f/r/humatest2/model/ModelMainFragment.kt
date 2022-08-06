@@ -1,16 +1,22 @@
-package f.r.f.hamrahanandroidkotlin.model
+package f.r.humatest2.model
 
-import f.r.f.hamrahanandroidkotlin.R
-import f.r.f.hamrahanandroidkotlin.Utils
+
+import androidx.lifecycle.LiveData
+import f.r.humatest2.dataClass.Movie
+import f.r.humatest2.dataClass.MovieList
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ModelAddCustomerActivity @Inject constructor() {
+class ModelMainFragment @Inject constructor() {
 
-    private val errorEmptyField = R.string.errorEmptyField
+    private val mainUiBackgroundUri = "https://dx35vtwkllhj9.cloudfront.net/universalstudios/ambulance/images/gallery/image1.jpg"
 
-    fun getErrorEmptyField() = errorEmptyField
+    fun getMainUiBackgroundUri() = mainUiBackgroundUri
 
+    fun getAllMovies(): List<Movie>{
+
+        return MovieList.list
+    }
 
 }
