@@ -1,7 +1,8 @@
-package f.r.humatest2
+package f.r.humatest2.view
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import f.r.humatest2.R
 
 
 class MainActivity : FragmentActivity() {

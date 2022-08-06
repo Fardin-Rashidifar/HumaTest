@@ -1,17 +1,13 @@
-package f.r.humatest2
+package f.r.humatest2.view
 
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.leanback.app.BackgroundManager
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
@@ -21,8 +17,9 @@ import androidx.leanback.widget.ListRowPresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import f.r.humatest.MovieList
-import org.w3c.dom.Text
+import f.r.humatest2.dataClass.MovieList
+import f.r.humatest2.R
+import f.r.humatest2.adapter.CardPresenter
 import java.util.*
 
 class MainFragment : BrowseSupportFragment() {
@@ -47,7 +44,9 @@ class MainFragment : BrowseSupportFragment() {
 
         mBackgroundManager = BackgroundManager.getInstance(activity)
         mBackgroundManager.attach(requireActivity().window)
-        mDefaultBackground = ContextCompat.getDrawable(requireContext(), R.drawable.bg_main_fragment_browser)
+        mDefaultBackground = ContextCompat.getDrawable(requireContext(),
+            R.drawable.bg_main_fragment_browser
+        )
         mMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(mMetrics)
         updateBackground("https://dx35vtwkllhj9.cloudfront.net/universalstudios/ambulance/images/gallery/image1.jpg")
@@ -79,7 +78,9 @@ class MainFragment : BrowseSupportFragment() {
         // set fastLane (or headers) background color
         brandColor = ContextCompat.getColor(requireContext(), R.color.search_opaque)
         // set search icon color
-        searchAffordanceColor = ContextCompat.getColor(requireContext(), R.color.lb_media_background_color)
+        searchAffordanceColor = ContextCompat.getColor(requireContext(),
+            R.color.lb_media_background_color
+        )
     }
 
     private fun setupEventListeners() {
