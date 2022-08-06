@@ -1,35 +1,42 @@
 package f.r.humatest2.view
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.leanback.app.BackgroundManager
 import androidx.leanback.app.BrowseSupportFragment
-import androidx.leanback.widget.ArrayObjectAdapter
-import androidx.leanback.widget.HeaderItem
-import androidx.leanback.widget.ListRow
-import androidx.leanback.widget.ListRowPresenter
+import androidx.leanback.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import dagger.hilt.android.AndroidEntryPoint
 import f.r.humatest2.dataClass.MovieList
 import f.r.humatest2.R
 import f.r.humatest2.adapter.CardPresenter
+import f.r.humatest2.dataClass.Movie
+import f.r.humatest2.viewModel.ViewModelMainFragment
 import java.util.*
 
+@AndroidEntryPoint
 class MainFragment : BrowseSupportFragment() {
     private lateinit var mBackgroundManager: BackgroundManager
     private var mDefaultBackground: Drawable? = null
     private lateinit var mMetrics: DisplayMetrics
 
+    private val viewModel: ViewModelMainFragment by viewModels()
+
     companion object {
-        private val NUM_ROWS = 2
-        private val NUM_COLS = 15
+        val NUM_ROWS = 2
+        val NUM_COLS = 15
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,35 +56,17 @@ class MainFragment : BrowseSupportFragment() {
         )
         mMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(mMetrics)
-        updateBackground("https://dx35vtwkllhj9.cloudfront.net/universalstudios/ambulance/images/gallery/image1.jpg")
+        updateBackground(viewModel.getMainUiBackgroundUri())
 
     }
 
-    override fun onInflateTitleView(
-        inflater: LayoutInflater?,
-        parent: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return super.onInflateTitleView(inflater, parent, savedInstanceState)
-    }
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
 
-        //val textView = titleView as TextView
-
-        /*if (textView!= null){        textView.typeface =
-            Typeface.createFromAsset(requireActivity().assets, "fonts/iransans_mobile_fa_num_bold.ttf")
-        }else{
-            Toast.makeText(requireContext(),"sd",Toast.LENGTH_LONG).show()
-        }*/
-
-        // over title
         headersState = BrowseSupportFragment.HEADERS_ENABLED
         isHeadersTransitionOnBackEnabled = true
 
-        // set fastLane (or headers) background color
         brandColor = ContextCompat.getColor(requireContext(), R.color.search_opaque)
-        // set search icon color
         searchAffordanceColor = ContextCompat.getColor(requireContext(),
             R.color.lb_media_background_color
         )
@@ -85,32 +74,36 @@ class MainFragment : BrowseSupportFragment() {
 
     private fun setupEventListeners() {
         setOnSearchClickedListener {
-            Toast.makeText(requireContext()!!, "Implement your own in-app search", Toast.LENGTH_LONG)
+            Toast.makeText(requireContext(), "Implement your own in-app search", Toast.LENGTH_LONG)
                 .show()
         }
-
+        onItemViewClickedListener = ItemViewClickedListener()
+        onItemViewSelectedListener = ItemViewSelectedListener()
     }
 
-    private fun loadRows() {
-        val list = MovieList.list
+    private inner class ItemViewClickedListener : OnItemViewClickedListener {
+        override fun onItemClicked(
+            itemViewHolder: Presenter.ViewHolder,
+            item: Any,
+            rowViewHolder: RowPresenter.ViewHolder,
+            row: Row
+        ) {
 
-        val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-        val cardPresenter = CardPresenter()
-
-        for (i in 0 until NUM_ROWS) {
-            if (i != 0) {
-                Collections.shuffle(list)
-            }
-            val listRowAdapter = ArrayObjectAdapter(cardPresenter)
-            for (j in 0 until NUM_COLS) {
-                listRowAdapter.add(list[j % 5])
-            }
-            val header = HeaderItem(i.toLong(), MovieList.MOVIE_CATEGORY[i])
-            rowsAdapter.add(ListRow(header, listRowAdapter))
         }
+    }
+
+    private inner class ItemViewSelectedListener : OnItemViewSelectedListener {
+        override fun onItemSelected(
+            itemViewHolder: Presenter.ViewHolder?, item: Any?,
+            rowViewHolder: RowPresenter.ViewHolder, row: Row
+        ) {
+
+        }
+    }
 
 
-        adapter = rowsAdapter
+    private fun loadRows() {
+        adapter = viewModel.loadRows()
     }
 
     private fun updateBackground(uri: String?) {
