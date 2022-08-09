@@ -60,11 +60,16 @@ class MainFragment : BrowseSupportFragment() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        headersState = BrowseSupportFragment.HEADERS_DISABLED
+
+    }
+
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
 
-        headersState = BrowseSupportFragment.HEADERS_ENABLED
-        isHeadersTransitionOnBackEnabled = true
+       // isHeadersTransitionOnBackEnabled = true
 
         brandColor = ContextCompat.getColor(requireContext(), R.color.search_opaque)
         searchAffordanceColor = ContextCompat.getColor(requireContext(),
